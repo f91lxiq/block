@@ -32,17 +32,36 @@ function Run(){
 };
 
 function GetButtonPress(btnID){
-	var btn =document.getElementById(btnID);
-
-	if (btn.isfoc == "disabled") {
-	   alert(btn);
+	try {
+		var btn = document.getElementById(btnID);
+		if (btn.className.length > 3) {
+		    alert(1);
+			return true;
+		}
+		return false;
+	}
+	catch(ex){
+		return false;
 	}
 }
 
 function GameProcess(){
 	try {
-		GetButtonPress("btnLeft");
+
 		if (UserMoveTime == 0) {
+					if (GetButtonPress('btnLeft')== true){
+			moveLeftFlg = true;
+		}
+		if (GetButtonPress('btnRight')== true){
+			moveRightFlg = true;
+		}
+		if (GetButtonPress('btnDown')== true){
+			moveDownFlg = true;
+		}
+		if (GetButtonPress('btnChange')== true){
+			changeDirectFlg = true;
+		}
+		
 			if (moveLeftFlg == true && IsItemCanMove(gameFact.CurrentItem.GetNextLeft()) == true) {
 				gameFact.CurrentItem.MoveLeft();
 			}
