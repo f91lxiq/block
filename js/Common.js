@@ -10,11 +10,11 @@ function GetTDItemByCell(cell){
 
 function OffsetByCL(col, row, x, y){
 	var newCell = GetCell();
-	newCell.x = col + x;
-	newCell.y = row + y;
+	newCell.x = Number(col) + Number(x);
+	newCell.y = Number(row) + Number(y);
 	return newCell;
 }
 
 function OffsetByCell(cell, x, y){
-	return OffsetByCL(cell.x, cell.y, x, y);
+	return OffsetByCL(Number(cell.x), Number(cell.y), Number(x), Number(y));
 }

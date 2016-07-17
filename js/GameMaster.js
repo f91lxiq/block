@@ -12,7 +12,7 @@ var moveDownFlg = false;
 var changeDirectFlg = false;
 var gameFact = {
 	BoderCollect : new Array(bodyHeith*bodyWidth),
-	CurrentItem : new Strick(DircetType.DOWN, GetCell() ,GetCell()),
+	CurrentItem : new Strick(DircetType.UP, GetCell() ,GetCell()),
 	NextItem : new Strick(DircetType.DOWN, GetCell() ,GetCell()),
 	GameStopFlg : true
 };

@@ -9,11 +9,16 @@ var DircetType ={
 	RIGHT:4
 };
 
-function GetCell(){
-    var Cell = {
+function GetCell(x, y){
+	var len = arguments.length;
+	var Cell = {
 		x: "",
 		y: ""
 	};
+	if (2 == len) {
+		Cell.x = x;
+		Cell.y = y;
+	}
 	return Cell;
 };
 var KeyCodes ={

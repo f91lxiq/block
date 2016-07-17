@@ -6,38 +6,21 @@ function ItemBase(itemDirect, itemType, itemCenterCell, itemNextItemCenterCell){
 	this.itemNextItemCenterCell = itemNextItemCenterCell;
 	this.itemsCollect = new Array(2);
 	this.itemsCollect[1] = 1;
-	//alert("1");
 }
 
 ItemBase.prototype.ClearItem = function(){
-	
-	if (this.itemDirect == DircetType.UP) {
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0,-1)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 0)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 1)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 2)).style.backgroundColor = "white";
-	}
-	else{
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, -1, 0)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 0, 0)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 1, 0)).style.backgroundColor = "white";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 2, 0)).style.backgroundColor = "white";
-	}
+	var cell = this.itemCenterCell;
+	this.itemsCollect.forEach(function(e){
+		GetTDItemByCell(OffsetByCell(cell, e.x, e.y)).style.backgroundColor = "white";
+	});
+
 };
 
 ItemBase.prototype.DrawItem = function(){
-	if (this.itemDirect == DircetType.UP) {
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0,-1)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 0)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 1)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell,  0, 2)).style.backgroundColor = "yellow";
-	}
-	else{
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, -1, 0)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 0, 0)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 1, 0)).style.backgroundColor = "yellow";
-		GetTDItemByCell(OffsetByCell(this.itemCenterCell, 2, 0)).style.backgroundColor = "yellow";
-	}
+    var cell = this.itemCenterCell;
+	this.itemsCollect.forEach(function(e){
+		GetTDItemByCell(OffsetByCell(cell, e.x, e.y)).style.backgroundColor = "yellow";
+	});
 };
 
 ItemBase.prototype.MoveLeft = function(){
@@ -60,22 +43,97 @@ ItemBase.prototype.MoveDown = function(){
 
 ItemBase.prototype.ChangeDirect = function(direct){
 	this.ClearItem();
-	this.itemDirect = direct;
+	this.ChangeDirectChild(direct);
 	this.DrawItem();
 };
-
 ItemBase.prototype.ChangeToNextDirect = function(){
 	this.ClearItem();
-	if (this.itemDirect == DircetType.UP){	
-		this.itemDirect = DircetType.LEFT;
-	} 
-	else{
-		this.itemDirect = DircetType.UP;
-	}
+	this.ChangeToNextDirectChild();
 	this.DrawItem();
 };
+ItemBase.prototype.ChangeDirectChild = function(direct){
+
+};
+
+ItemBase.prototype.ChangeToNextDirectChild = function(){
+	
+};
+ItemBase.prototype.SetCells = function(){
+    if(this.itemDirect == DircetType.UP){
+		this.itemsCollect = this.CellUp();
+	}else if(this.itemDirect == DircetType.RIGHT){
+		this.itemsCollect = this.CellRight();
+	}else if(this.itemDirect == DircetType.LEFT){
+		this.itemsCollect = this.CellLeft();
+	}else if(this.itemDirect == DircetType.DOWN){
+		this.itemsCollect = this.CellDown();
+	}
+};
+ItemBase.prototype.CellUp = function(){
+	return new Array();
+};
+ItemBase.prototype.CellDown = function(){
+	return new Array();
+};
+ItemBase.prototype.CellLeft = function(){
+	return new Array();
+};
+ItemBase.prototype.CellRight = function(){
+	return new Array();
+};
+
 Object.setPrototypeOf(Strick.prototype, ItemBase.prototype);
-function Strick(itemDirect,  itemCenterCell, itemNextItemCenterCell){
+
+function Strick(itemDirect, itemCenterCell, itemNextItemCenterCell){
 	var item = new ItemBase(itemDirect, ItemType.Strick, GetCell(), GetCell());
+	item.itemsCollect = new Array(4);
+	item.itemCenterCell = itemCenterCell;
+	item.itemNextItemCenterCell = itemNextItemCenterCell;
+	item.itemDirect = itemDirect;
+   
+	item.CellUp = function(){
+		var cells = new Array(4);
+		cells[0] = GetCell(0, -1);
+		cells[1] = GetCell(0, 0);
+		cells[2] = GetCell(0, 1);
+		cells[3] = GetCell(0, 2);
+		return cells;
+	};
+	
+	item.CellLeft = function(){
+		var cells = new Array(4);
+		cells[0] = GetCell(-1, 0);
+		cells[1] = GetCell(0, 0);
+		cells[2] = GetCell(1, 0);
+		cells[3] = GetCell(2, 0);
+		return cells;
+	};
+	item.SetCells();
+	
+	item.ChangeToNextDirectChild = function(){
+		if (item.itemDirect == DircetType.UP) {
+			item.itemDirect = DircetType.LEFT;
+		}
+		else {
+			item.itemDirect = DircetType.UP;
+		}
+		item.SetCells();
+	};
+	item.ChangeDirectChild = function(direct){
+		if (item.itemDirect == DircetType.UP) {
+			item.itemDirect = DircetType.UP;
+		}
+		else 
+			if (item.itemDirect == DircetType.UP) {
+				item.itemDirect = DircetType.LEFT;
+			}
+		item.SetCells();
+	};
 	return item;
 }
+
+
+
+
+
+
