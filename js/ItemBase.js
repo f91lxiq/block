@@ -74,7 +74,6 @@ ItemBase.prototype.GetCurrentCells = function(){
 	var nextCells= new Array(this.itemCenterCell.length);
 	var cnt= 0;
     var cell =this.itemCenterCell;
-	var str = "";
 	this.itemsCollect.forEach(function(e){
 		nextCells[cnt]=(OffsetByCell(cell, e.x, e.y));
 		cnt++;
@@ -85,7 +84,6 @@ ItemBase.prototype.GetNextCells = function(x, y){
 	var nextCells= new Array(this.itemCenterCell.length);
 	var cnt= 0;
     var cell = OffsetByCell(this.itemCenterCell,x,y);
-	var str = "";
 	this.itemsCollect.forEach(function(e){
 		nextCells[cnt]=(OffsetByCell(cell, e.x, e.y));
 		cnt++;
