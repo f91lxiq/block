@@ -31,10 +31,17 @@ function Run(){
 	
 };
 
+function GetButtonPress(btnID){
+	var btn =document.getElementById(btnID);
 
+	if (btn.isfoc == "disabled") {
+	   alert(btn);
+	}
+}
 
 function GameProcess(){
 	try {
+		GetButtonPress("btnLeft");
 		if (UserMoveTime == 0) {
 			if (moveLeftFlg == true && IsItemCanMove(gameFact.CurrentItem.GetNextLeft()) == true) {
 				gameFact.CurrentItem.MoveLeft();
@@ -121,6 +128,18 @@ function keydown(){
 	if(event.keyCode == KeyCodes.DownKey){
 		moveDownFlg = true;
 	}
+}
+function LeftBtn(){
+	moveLeftFlg = true;
+}
+function RightBtn(){
+	moveRightFlg = true;
+}
+function ChangeBtn(){
+	changeDirectFlg = true;
+}
+function DownBtn(){
+	moveDownFlg = true;
 }
 
 function CheckNewItem(){
