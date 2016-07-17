@@ -24,41 +24,51 @@ function IniGame(){
 function Run(){
     gameFact.CurrentItem.itemCenterCell.x = 5;
 	gameFact.CurrentItem.itemCenterCell.y = 2;
-	time = setInterval("GameProcess()", 1);
+	try{
+		clearTimeout(timer);
+	}catch(ex){
+		
+	}
+	timer = setInterval("GameProcess()", 1);
 	
 };
 
 function GameProcess(){
-	if (UserMoveTime == 0) {
-		if (moveLeftFlg == true) {
-			gameFact.CurrentItem.MoveLeft();
-			moveLeftFlg = false;
+	try {
+		if (UserMoveTime == 0) {
+			if (moveLeftFlg == true) {
+				gameFact.CurrentItem.MoveLeft();
+				moveLeftFlg = false;
+			}
+			
+			if (moveRightFlg == true) {
+				gameFact.CurrentItem.MoveRight();
+				moveRightFlg = false;
+			}
+			
+			if (moveDownFlg == true) {
+				gameFact.CurrentItem.MoveDown();
+				moveDownFlg = false;
+			}
+			
+			if (changeDirectFlg == true) {
+				gameFact.CurrentItem.ChangeToNextDirect();
+				changeDirectFlg = false;
+			}
 		}
 		
-		if (moveRightFlg == true) {
-			gameFact.CurrentItem.MoveRight();
-			moveRightFlg = false;
+		if (AutoMoveTime == 0) {
+			gameFact.CurrentItem.ClearItem();
+			gameFact.CurrentItem.itemCenterCell = OffsetByCell(gameFact.CurrentItem.itemCenterCell, 0, 1);
+			gameFact.CurrentItem.DrawItem();
 		}
 		
-		if (moveDownFlg == true) {
-			gameFact.CurrentItem.MoveDown();
-			moveDownFlg = false;
-		}
-		
-		if (changeDirectFlg == true) {
-			gameFact.CurrentItem.ChangeToNextDirect();
-			changeDirectFlg = false;
-		}
+		AutoMoveTime = (AutoMoveTime + 1) % 150;
+		UserMoveTime = (UserMoveTime + 1) % 25;
 	}
-	
-	if (AutoMoveTime == 0) {
-		gameFact.CurrentItem.ClearItem();
-		gameFact.CurrentItem.itemCenterCell = OffsetByCell(gameFact.CurrentItem.itemCenterCell, 0, 1);
-		gameFact.CurrentItem.DrawItem();
+	catch(ex){
+		clearTimeout(timer);
 	}
-	
-	AutoMoveTime = (AutoMoveTime + 1) % 150;
-	UserMoveTime = (UserMoveTime + 1) % 25;
 	
 }
 
