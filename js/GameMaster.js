@@ -10,6 +10,10 @@ var moveLeftFlg = false;
 var moveRightFlg = false;
 var moveDownFlg = false;
 var changeDirectFlg = false;
+var BtnMoveLeftFlg = false;
+var BtnMoveRightFlg = false;
+var BtnMoveDownFlg = false;
+var BtnChangeDirectFlg = false;
 var gameFact = {
 	BoderCollect : new Array(bodyHeith*bodyWidth),
 	CurrentItem : new Strick(DircetType.UP),
@@ -47,21 +51,21 @@ function GetButtonPress(btnID){
 
 function GameProcess(){
 	try {
-
+	
 		if (UserMoveTime == 0) {
-					if (GetButtonPress('btnLeft')== true){
-			moveLeftFlg = true;
-		}
-		if (GetButtonPress('btnRight')== true){
-			moveRightFlg = true;
-		}
-		if (GetButtonPress('btnDown')== true){
-			moveDownFlg = true;
-		}
-		if (GetButtonPress('btnChange')== true){
-			changeDirectFlg = true;
-		}
-		
+			if (BtnMoveLeftFlg == true) {
+				moveLeftFlg = true;
+			}
+			if (BtnMoveRightFlg == true) {
+				moveRightFlg = true;
+			}
+			if (BtnMoveDownFlg == true) {
+				moveDownFlg = true;
+			}
+			if (BtnChangeDirectFlg == true) {
+				changeDirectFlg = true;
+			}
+			
 			if (moveLeftFlg == true && IsItemCanMove(gameFact.CurrentItem.GetNextLeft()) == true) {
 				gameFact.CurrentItem.MoveLeft();
 			}
@@ -70,7 +74,7 @@ function GameProcess(){
 				gameFact.CurrentItem.MoveRight();
 			}
 			
-			if (moveDownFlg == true){
+			if (moveDownFlg == true) {
 				if (IsItemCanMove(gameFact.CurrentItem.GetNextDown()) == true) {
 					gameFact.CurrentItem.MoveDown();
 				}
@@ -99,8 +103,8 @@ function GameProcess(){
 		
 		AutoMoveTime = (AutoMoveTime + 1) % 150;
 		UserMoveTime = (UserMoveTime + 1) % 25;
-	}
-	catch(ex){
+	} 
+	catch (ex) {
 		clearTimeout(timer);
 	}
 	
@@ -148,17 +152,18 @@ function keydown(){
 		moveDownFlg = true;
 	}
 }
+
 function LeftBtn(){
-	moveLeftFlg = true;
+	BtnMoveLeftFlg = !BtnMoveLeftFlg;
 }
 function RightBtn(){
-	moveRightFlg = true;
+	BtnMoveRightFlg = !BtnMoveRightFlg;
 }
 function ChangeBtn(){
-	changeDirectFlg = true;
+	BtnChangeDirectFlg = !BtnChangeDirectFlg;
 }
 function DownBtn(){
-	moveDownFlg = true;
+	BtnMoveDownFlg = !BtnMoveDownFlg;
 }
 
 function CheckNewItem(){

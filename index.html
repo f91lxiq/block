@@ -6,6 +6,7 @@
     <script type="text/javascript" src="js/ItemBase.js"></script>
 	<script type="text/javascript" src="js/GameMaster.js"></script>
 	<link href="css/btn.css" rel="stylesheet" type="text/css"> 
+	<link href="css/Touch.css" rel="stylesheet" type="text/css">
   </head>
 
   <body>
@@ -33,12 +34,26 @@
 
     </table>
 	</div>
-	<div id= "btnDiv"  align="center">
+	<!--
+	<div id= "btnDiv"  align="center" class="viewport">
 		<table align="center" border="1">
 			<tr> <td><button id = "btnStart"  class="btn" onclick="Run();">START</button></td><td class="td"></td> <td class="td"></td></tr>
-			<tr> <td class="td"><button id = "btnDown" class="btn" onclick="LeftBtn();">LEFT</button></td> <td class="td"><button id = "btnChange" class="btn" onclick="ChangeBtn();">CHANGE</button></td> <td class="td"><button id = "btnRight" class="btn" onclick="RightBtn();">RIGHT</button></td></tr>
-			<tr> <td class="td"></td> <td class="td"><button id = "btnDown" class="btn" onclick="DownBtn();">DOWN</button> </td> <td class="td"></td></tr>
+			<tr> <td class="td"><button id = "btnDown" class="btn" onmousedown="LeftBtn();" onmouseup="LeftBtn();">LEFT</button></td> <td class="td"><button id = "btnChange" class="btn" onmousedown="ChangeBtn();" onmouseup="ChangeBtn();">CHANGE</button></td> <td class="td"><button id = "btnRight" class="btn" onmousedown="RightBtn();" onmouseup="RightBtn();">RIGHT</button></td></tr>
+			<tr> <td class="td"></td> <td class="td"><button id = "btnDown" class="btn"  onmousedown="DownBtn();" onmouseup="DownBtn();">DOWN</button> </td> <td class="td"></td></tr>
 		</table>
 	</div>
+		-->
+	<div id= "btnDiv"  align="center" >
+		<table align="center" border="1">
+			<tr> <td><button id = "btnStart"  class="btn" onclick="Run();">START</button></td><td class="td"></td> <td class="td"></td></tr>
+			<tr> <td class="td"><button id = "btnDown" class="btn" onmousedown="LeftBtn();" onmouseup="LeftBtn();">LEFT</button></td> <td class="td"><button id = "btnChange" class="btn" onmousedown="ChangeBtn();" onmouseup="ChangeBtn();">CHANGE</button></td> <td class="td"><button id = "btnRight" class="btn" onmousedown="RightBtn();" onmouseup="RightBtn();">RIGHT</button></td></tr>
+			<tr> <td class="td"></td> <td class="td"><button id = "btnDown" class="btn"  onmousedown="DownBtn();" onmouseup="DownBtn();">DOWN</button> </td> <td class="td"></td></tr>
+		</table>
+	</div>
+		<div id= "btnDiv"  align="center" class="viewport">
+
+	</div>
+
+
   </body>
 </html>

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.viewport{
+   /*width: 500%;
+   height: 100%;
+   pointer-events: none;
+   display: -webkit-box;
+   */
+   width:450px;
+   height:90px;
+   border: 1px;
+   border:#000000 solid 1px;
+   overflow: hidden;
+   -webkit-transform: translate3d(0,0,0);
+   backface-visibility: hidden;
+   position: relative;
+}
