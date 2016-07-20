@@ -1,7 +1,7 @@
 var timer;
 
 document.onkeydown = keydown;
-
+var touchMaster;
 var bodyWidth = 15;
 var bodyHeith = 19;
 var AutoMoveTime = 0;
@@ -10,15 +10,73 @@ var moveLeftFlg = false;
 var moveRightFlg = false;
 var moveDownFlg = false;
 var changeDirectFlg = false;
-var BtnMoveLeftFlg = false;
-var BtnMoveRightFlg = false;
-var BtnMoveDownFlg = false;
-var BtnChangeDirectFlg = false;
 var gameFact = {
 	BoderCollect : new Array(bodyHeith*bodyWidth),
 	CurrentItem : new Strick(DircetType.UP),
 	NextItem : new Strick(DircetType.UP),
 	GameStopFlg : true
+};
+var touchFact = {
+	LeftMoveCnt: 0,
+	RightMoveCnt: 0,
+	DownMoveCnt: 0,
+	ChangeMoveCnt: 0,
+	addLeft: function(){
+		//LeftMoveCnt = 0;
+		RightMoveCnt = 0;
+		DownMoveCnt = 0;
+		ChangeMoveCnt = 0;
+		if (LeftMoveCnt < 7) {
+			LeftMoveCnt++;
+		}
+	},
+	addRight: function(){
+		LeftMoveCnt = 0;
+		//RightMoveCnt = 0;
+		DownMoveCnt = 0;
+		ChangeMoveCnt = 0;
+		if (LeftMoveCnt < 7) {
+			RightMoveCnt++;
+		}
+	},
+	addChange: function(){
+		LeftMoveCnt = 0;
+		RightMoveCnt = 0;
+		DownMoveCnt = 0;
+		//ChangeMoveCnt = 0;
+		if (LeftMoveCnt < 7) {
+			ChangeMoveCnt++;
+		}
+	},
+	addDown: function(){
+		LeftMoveCnt = 0;
+		RightMoveCnt = 0;
+		//DownMoveCnt = 0;
+		ChangeMoveCnt = 0;
+		if (LeftMoveCnt < 7) {
+			DownMoveCnt++;
+		}
+	},
+	removeLeft: function(){
+		if (LeftMoveCnt > 0) {
+			LeftMoveCnt--;
+		}
+	},
+	removeRight: function(){
+		if (LeftMoveCnt > 0) {
+			RightMoveCnt--;
+		}
+	},
+	removeChange: function(){
+		if (LeftMoveCnt > 0) {
+			ChangeMoveCnt--;
+		}
+	},
+	removeDown: function(){
+		if (LeftMoveCnt > 0) {
+			DownMoveCnt--;
+		}
+	}
 };
 var CellsStr = "";
 function IniGame(){
@@ -28,10 +86,17 @@ function IniGame(){
 function Run(){
 	try{
 		clearTimeout(timer);
+		//touchMaster = null;
 	}catch(ex){
 		
 	}
 	timer = setInterval("GameProcess()", 1);
+	touchMaster =  new LSwiperMaker({
+            bind:document.getElementById("touchDiv"),  
+            dire_h:true,     
+            backfn:function(o){
+            }
+    });
 	
 };
 
@@ -53,16 +118,20 @@ function GameProcess(){
 	try {
 	
 		if (UserMoveTime == 0) {
-			if (BtnMoveLeftFlg == true) {
+			if (touchFact.LeftMoveCnt > 0) {
+				touchFact.removeLeft();
 				moveLeftFlg = true;
 			}
-			if (BtnMoveRightFlg == true) {
+			if (touchFact.RightMoveCnt > 0) {
+				touchFact.removeRight();
 				moveRightFlg = true;
 			}
-			if (BtnMoveDownFlg == true) {
+			if (touchFact.DownMoveCnt > 0) {
+				touchFact.removeDown();
 				moveDownFlg = true;
 			}
-			if (BtnChangeDirectFlg == true) {
+			if (touchFact.ChangeMoveCnt > 0) {
+				touchFact.removeChange();
 				changeDirectFlg = true;
 			}
 			
@@ -101,8 +170,8 @@ function GameProcess(){
 			}
 		}
 		
-		AutoMoveTime = (AutoMoveTime + 1) % 150;
-		UserMoveTime = (UserMoveTime + 1) % 25;
+		AutoMoveTime = (AutoMoveTime + 1) % 100;
+		UserMoveTime = (UserMoveTime + 1) % 20;
 	} 
 	catch (ex) {
 		clearTimeout(timer);
@@ -154,16 +223,16 @@ function keydown(){
 }
 
 function LeftBtn(){
-	BtnMoveLeftFlg = !BtnMoveLeftFlg;
+	moveLeftFlg = true;
 }
 function RightBtn(){
-	BtnMoveRightFlg = !BtnMoveRightFlg;
+	moveRightFlg = true;
 }
 function ChangeBtn(){
-	BtnChangeDirectFlg = !BtnChangeDirectFlg;
+	changeDirectFlg = true;
 }
 function DownBtn(){
-	BtnMoveDownFlg = !BtnMoveDownFlg;
+	moveDownFlg = true;
 }
 
 function CheckNewItem(){

@@ -5,10 +5,11 @@
    pointer-events: none;
    display: -webkit-box;
    */
-   width:450px;
-   height:90px;
+   width:445px;
+   height:170px;
    border: 1px;
    border:#000000 solid 1px;
+   align: center;
    overflow: hidden;
    -webkit-transform: translate3d(0,0,0);
    backface-visibility: hidden;

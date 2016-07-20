@@ -35,3 +35,12 @@ function OffsetByCell(cell, x, y){
 function getRandomInt(min, max) {
   return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
+
+function test(){
+	touchMaster = new LSwiperMaker({
+            bind:document.getElementById("touchDiv"),  
+            dire_h:true,     
+            backfn:function(o){
+            }
+    });
+}
