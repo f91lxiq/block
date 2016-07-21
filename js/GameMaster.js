@@ -110,14 +110,25 @@ function ChangeInputForPC(){
 	var btnDiv = document.getElementById("btnDiv");
 	var touchDiv = document.getElementById("touchDiv");
 	touchDiv.className = "NotDisplay";
-	btnDiv.className = "viewportforPc";
+	if (IsPC() == true) {
+		btnDiv.className = "viewportforPc";
+	}
+	else {
+		btnDiv.className = "viewportForPhone";
+	}
 }
 
 function ChangeInputNotForPC(){
 	var btnDiv = document.getElementById("btnDiv");
 	var touchDiv = document.getElementById("touchDiv");
 	btnDiv.className = "NotDisplay";
-	touchDiv.className = "viewportForPhone";
+	if (IsPC() == true) {
+		touchDiv.className = "viewportforPc";
+	}
+	else {
+		touchDiv.className = "viewportForPhone";
+	}
+	
 }
 
 
