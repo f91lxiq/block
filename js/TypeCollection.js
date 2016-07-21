@@ -1,5 +1,6 @@
 var ItemType ={
-	Strick:1
+	Strick:1,
+	Block:2
 };
 
 var DircetType ={
@@ -26,4 +27,9 @@ var KeyCodes ={
 	RightKey :39,
 	UpKey : 38,
 	DownKey :40
+};
+
+var ClientType = {
+	PC:1,
+	NotPC:2
 };

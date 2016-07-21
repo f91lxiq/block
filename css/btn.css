@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
         .btn
         {
-            width: 150px;
+            width: 140px;
             height:24px;
             align:center;
             border-right: #7b9ebd 1px solid;
@@ -16,26 +16,10 @@
             padding-top: 2px;
             border-bottom: #7b9ebd 1px solid;
         }
-        .btn:active
-        {
-            width: 150px;
-            height:24px;
-            align:center;
-            border-right: #7EBF4F 1px solid;
-            padding-right: 2px;
-            border-top: #7EBF4F 1px solid;
-            padding-left: 2px;
-            font-size: 12px;
-            filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#B3D997);
-            border-left: #7EBF4F 1px solid;
-            cursor: hand;
-            color: black;
-            padding-top: 2px;
-            border-bottom: #7EBF4F 1px solid;
-        }
         .td
         {
-            width: 150px;
+            width: 140px;
             height:24px;
-            align:center;
+            align:right;
+            
         }

@@ -10,12 +10,14 @@ var moveLeftFlg = false;
 var moveRightFlg = false;
 var moveDownFlg = false;
 var changeDirectFlg = false;
+var CurrentInputType = ClientType.PC;
 var gameFact = {
 	BoderCollect : new Array(bodyHeith*bodyWidth),
 	CurrentItem : new Strick(DircetType.UP),
 	NextItem : new Strick(DircetType.UP),
 	GameStopFlg : true
 };
+
 var touchFact = {
 	LeftMoveCnt: 0,
 	RightMoveCnt: 0,
@@ -79,9 +81,59 @@ var touchFact = {
 	}
 };
 var CellsStr = "";
+
 function IniGame(){
 	
 }
+
+function ChangeInput(type){
+	if (arguments.length == 0) {
+		if (CurrentInputType == ClientType.PC) {
+			ChangeInputNotForPC();
+			CurrentInputType = ClientType.NotPC;
+		}
+		else {
+			ChangeInputForPC();
+			CurrentInputType = ClientType.PC;
+		}
+	}
+	else 
+		if (arguments.length == 1) {
+			if (type == ClientType.PC) {
+				ChangeInputForPC();
+				CurrentInputType = ClientType.PC;
+				
+			}
+			else {
+				ChangeInputNotForPC();
+				CurrentInputType = ClientType.NotPC;
+			}
+		}
+}
+
+function BodyIni(){
+	if ( IsPC() == true){
+		ChangeInputForPC();
+	}
+	else{
+		ChangeInputNotForPC();
+	}
+}
+
+function ChangeInputForPC(){
+	var btnDiv = document.getElementById("btnDiv");
+	var touchDiv = document.getElementById("touchDiv");
+	touchDiv.className = "NotDisplay";
+	btnDiv.className = "viewport";
+}
+
+function ChangeInputNotForPC(){
+	var btnDiv = document.getElementById("btnDiv");
+	var touchDiv = document.getElementById("touchDiv");
+	btnDiv.className = "NotDisplay";
+	touchDiv.className = "viewport";
+}
+
 
 function Run(){
 	try{
@@ -243,10 +295,14 @@ function CheckNewItem(){
 	}
 }
 function NewItem(){
-	var newNextItem;
-	var index =getRandomInt(1,1);
+	var newNextItem ;
+	var index =getRandomInt(1,2);
 	var direct =getRandomInt(1,4);
 	if (index == 1) {
+		newNextItem = new Strick(direct);
+		AutoMoveTime = 1;
+		UserMoveTime = 1;
+	}else{
 		newNextItem = new Strick(direct);
 		AutoMoveTime = 1;
 		UserMoveTime = 1;
