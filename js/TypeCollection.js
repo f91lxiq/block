@@ -1,6 +1,7 @@
 var ItemType ={
 	Strick:1,
-	Block:2
+	Block:2,
+	LeftClick:3
 };
 
 var DircetType ={

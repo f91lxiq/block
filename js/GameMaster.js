@@ -300,7 +300,7 @@ function NewItem(){
 		AutoMoveTime = 1;
 		UserMoveTime = 1;
 	}else{
-		newNextItem = new Strick(direct);
+		newNextItem = new Block(direct);
 		AutoMoveTime = 1;
 		UserMoveTime = 1;
 	}
