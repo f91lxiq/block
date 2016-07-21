@@ -110,14 +110,14 @@ function ChangeInputForPC(){
 	var btnDiv = document.getElementById("btnDiv");
 	var touchDiv = document.getElementById("touchDiv");
 	touchDiv.className = "NotDisplay";
-	btnDiv.className = "viewport";
+	btnDiv.className = "viewportforPc";
 }
 
 function ChangeInputNotForPC(){
 	var btnDiv = document.getElementById("btnDiv");
 	var touchDiv = document.getElementById("touchDiv");
 	btnDiv.className = "NotDisplay";
-	touchDiv.className = "viewport";
+	touchDiv.className = "viewportForPhone";
 }
 
 
