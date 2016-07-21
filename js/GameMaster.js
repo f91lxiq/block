@@ -86,8 +86,7 @@ function IniGame(){
 	
 }
 
-function ChangeInput(type){
-	if (arguments.length == 0) {
+function ChangeInput(){
 		if (CurrentInputType == ClientType.PC) {
 			ChangeInputNotForPC();
 			CurrentInputType = ClientType.NotPC;
@@ -95,19 +94,6 @@ function ChangeInput(type){
 		else {
 			ChangeInputForPC();
 			CurrentInputType = ClientType.PC;
-		}
-	}
-	else 
-		if (arguments.length == 1) {
-			if (type == ClientType.PC) {
-				ChangeInputForPC();
-				CurrentInputType = ClientType.PC;
-				
-			}
-			else {
-				ChangeInputNotForPC();
-				CurrentInputType = ClientType.NotPC;
-			}
 		}
 }
 
