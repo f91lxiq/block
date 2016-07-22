@@ -292,18 +292,29 @@ function CheckNewItem(){
 	}
 }
 function NewItem(){
-	var newNextItem ;
-	var index =getRandomInt(1,2);
-	var direct =getRandomInt(1,4);
+	var newNextItem;
+	var index = getRandomInt(1, 6);
+	var direct = getRandomInt(1, 4);
 	if (index == 1) {
 		newNextItem = new Strick(direct);
-		AutoMoveTime = 1;
-		UserMoveTime = 1;
-	}else{
-		newNextItem = new Block(direct);
-		AutoMoveTime = 1;
-		UserMoveTime = 1;
 	}
+	else if (index == 2) {
+		newNextItem = new Block(direct);
+	}
+	else if (index == 3) {
+		newNextItem = new LeftClick(direct);
+	}
+	else if (index == 4) {
+		newNextItem = new RightClick(direct);
+	}
+	else if (index == 5) {
+		newNextItem = new LeftStrick(direct);
+	}
+	else if (index == 6) {
+		newNextItem = new RightStrick(direct);
+	}
+	AutoMoveTime = 1;
+	UserMoveTime = 1;
 	RefleshCellCollect();
 	//alert(CellsStr);		
 	return newNextItem;
